@@ -92,7 +92,7 @@
         window.addEventListener('load', function() {
             const loadingScreen = document.getElementById('loadingScreen');
             
-            // Hide loading screen after 5 seconds
+            // Hide loading screen after 2 seconds
             setTimeout(function() {
                 loadingScreen.classList.add('hidden');
                 
@@ -100,7 +100,7 @@
                 setTimeout(function() {
                     loadingScreen.style.display = 'none';
                 }, 1000); // Wait for fade animation (1s)
-            }, 5000); // 5 seconds
+            }, 2000); // 2 seconds
         });
 
         function showSlide(index) {
