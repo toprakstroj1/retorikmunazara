@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <title>Çukurova Genç Meclis Başvuru | RETORİK</title>
+    <meta name="description" content="Çukurova Genç Meclis Demo vekil ve organizasyon başvuruları." />
+    <meta name="theme-color" content="#8B1A1A" />
+    <link rel="icon" href="../../images/retorik-logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="../../images/retorik-logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="../../card-buttons.css" />
+    <link rel="stylesheet" href="../../theme-refresh.css" />
+    <link rel="stylesheet" href="../basvuru.css" />
+</head>
+<body class="gencmeclis-page">
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../../" class="logo-link">
+                <img src="../../images/retorik-logo.png" class="logo-svg" alt="Retorik Logo">
+                <span class="logo-text">RETORİK</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="../../#home" class="nav-link">Anasayfa</a></li>
+                <li><a href="../../#collections" class="nav-link active">Etkinlikler</a></li>
+                <li><a href="../../#featured" class="nav-link">Münazara</a></li>
+                <li><a href="https://tab.retorikmunazara.com" class="nav-link" target="_blank" rel="noopener noreferrer">Tab</a></li>
+                <li><a href="../../#team" class="nav-link">Ekibimiz</a></li>
+                <li><a href="../../#contact" class="nav-link">İletişim</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="application-hero">
+            <div class="hero-orbit" aria-hidden="true"></div>
+            <div class="application-container">
+                <div class="application-kicker">14 Haziran 2026 | TBMM Simülasyonu</div>
+                <h1>Çukurova Genç Meclis Demo</h1>
+                <p>Katılım türünü seç, başvuru formunu doldur ve başvurunu doğrudan değerlendirme formuna ilet.</p>
+            </div>
+        </section>
+
+        <section class="application-picker" aria-label="Başvuru türü seçimi">
+            <div class="application-container picker-grid">
+                <article class="application-choice-card reveal-card">
+                    <span class="choice-number">01</span>
+                    <div>
+                        <p class="card-badge">Katılımcı</p>
+                        <h2>Vekil Başvurusu</h2>
+                        <p>Komisyonlarda vekil olarak temsil görevi alıp yasa önerileri, müzakere ve genel kurul süreçlerine dahil olmak isteyen öğrenciler için.</p>
+                    </div>
+                    <button type="button" class="apply-btn js-application-open" data-target="delegate">Başvuru Sekmesini Aç</button>
+                </article>
+
+                <article class="application-choice-card reveal-card">
+                    <span class="choice-number">02</span>
+                    <div>
+                        <p class="card-badge">Organizasyon</p>
+                        <h2>Orga Başvurusu</h2>
+                        <p>Basın, güvenlik, personel, eğlence ve saha akışında görev alarak etkinliğin yürütülmesine destek olmak isteyenler için.</p>
+                    </div>
+                    <button type="button" class="apply-btn js-application-open" data-target="organization">Başvuru Sekmesini Aç</button>
+                </article>
+            </div>
+        </section>
+
+        <section class="application-form-stage" data-application-stage hidden>
+            <div class="application-container">
+                <div class="application-form-card" id="delege" data-application-panel="delegate" hidden>
+                    <div class="form-panel-head">
+                        <div>
+                            <p class="application-kicker">Vekil Başvurusu</p>
+                            <h2>Vekil Bilgileri</h2>
+                        </div>
+                        <button class="form-close" type="button" data-close-application aria-label="Formu kapat">&times;</button>
+                    </div>
+
+                    <form class="gencmeclis-form" data-google-form="delegate">
+                        <div class="form-grid">
+                            <label>İsim ve Soy İsim<input type="text" name="fullName" autocomplete="name" required /></label>
+                            <label>Doğum Tarihi<input type="date" name="birthDate" required /></label>
+                            <label>Telefon Numarası<input type="tel" name="phone" autocomplete="tel" required /></label>
+                            <label>E-mail Hesabı<input type="email" name="email" autocomplete="email" required /></label>
+                            <label>Hangi Şehirden Katılım Sağlıyorsunuz?
+                                <select name="city" autocomplete="address-level2" required>
+                                    <option value="" selected disabled>Şehir seçin</option>
+                                    <option value="Adana">Adana</option>
+                                    <option value="Mersin">Mersin</option>
+                                    <option value="Diğer">Diğer</option>
+                                </select>
+                            </label>
+                            <label>Okul<input type="text" name="school" required /></label>
+                            <label class="form-wide">Deneyimleriniz<textarea name="experiences" rows="4" required></textarea></label>
+                            <label class="form-wide">Komisyon Tercihi (1. tercih)
+                                <select name="committee" id="committee-first" required>
+                                    <option value="" selected disabled>Birinci komisyonu seçin</option>
+                                    <option value="Anayasa Komisyonu">Anayasa Komisyonu</option>
+                                    <option value="Dışişleri">Dışişleri Komisyonu</option>
+                                    <option value="Milli Eğitim Komisyonu">Milli Eğitim Komisyonu</option>
+                                </select>
+                            </label>
+                            <label class="form-wide">Komisyon Tercihi (2. tercih)
+                                <select name="committee2" id="committee-second" required>
+                                    <option value="" selected disabled>İkinci komisyonu seçin</option>
+                                    <option value="Anayasa Komisyonu">Anayasa Komisyonu</option>
+                                    <option value="Dışişleri">Dışişleri Komisyonu</option>
+                                    <option value="Milli Eğitim Komisyonu">Milli Eğitim Komisyonu</option>
+                                </select>
+                            </label>
+                            <label class="form-wide">Varsa Referans Olan Kişi<textarea name="reference" rows="3"></textarea></label>
+                            <label class="form-wide">Eklemek İstedikleriniz<textarea name="notes" rows="3"></textarea></label>
+                        </div>
+
+                        <div class="form-consents">
+                            <label><input type="checkbox" name="rules" value="Evet." required /> Şartları okudum, kabul ediyorum.</label>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="form-submit" type="submit">Başvuruyu Gönder</button>
+                            <p class="form-status" role="status"></p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="application-form-card" id="orga" data-application-panel="organization" hidden>
+                    <div class="form-panel-head">
+                        <div>
+                            <p class="application-kicker">Organizasyon Başvurusu</p>
+                            <h2>Ekip Görev Bilgileri</h2>
+                        </div>
+                        <button class="form-close" type="button" data-close-application aria-label="Formu kapat">&times;</button>
+                    </div>
+
+                    <form class="gencmeclis-form" data-google-form="organization">
+                        <div class="form-grid">
+                            <label>İsim ve Soy İsim<input type="text" name="fullName" autocomplete="name" required /></label>
+                            <label>Doğum Tarihi<input type="date" name="birthDate" required /></label>
+                            <label>Telefon Numarası<input type="tel" name="phone" autocomplete="tel" required /></label>
+                            <label>E-mail Hesabı<input type="email" name="email" autocomplete="email" required /></label>
+                            <label>Hangi Şehirden Katılım Sağlıyorsunuz?
+                                <select name="city" autocomplete="address-level2" required>
+                                    <option value="" selected disabled>Şehir seçin</option>
+                                    <option value="Adana">Adana</option>
+                                    <option value="Mersin">Mersin</option>
+                                    <option value="Diğer">Diğer</option>
+                                </select>
+                            </label>
+                            <label>Okul<input type="text" name="school" required /></label>
+                            <label>Organizasyon Birimleri
+                              <select name="team" required>
+                                    <option value="" selected disabled>Birim seçin</option>
+                                    <option value="Basın Ekibi">Basın Ekibi</option>
+                                    <option value="Eğlence Ekibi">Eğlence Ekibi</option>
+                                    <option value="Personel Ekibi">Personel Ekibi</option>
+                                    <option value="Güvenlik Ekibi">Güvenlik Ekibi</option>
+                                </select>
+                            </label>
+                            <label class="form-wide">Deneyimleriniz<textarea name="experiences" rows="4" required></textarea></label>
+                            <label class="form-wide">Varsa Referans Olan Kişi<textarea name="reference" rows="3"></textarea></label>
+                            <label class="form-wide">Eklemek İstedikleriniz<textarea name="notes" rows="3"></textarea></label>
+                        </div>
+
+                        <div class="form-consents">
+                            <label><input type="checkbox" name="rules" value="Evet." required /> Şartları okudum, kabul ediyorum.</label>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="form-submit" type="submit">Başvuruyu Gönder</button>
+                            <p class="form-status" role="status"></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="success-overlay" data-success-overlay hidden>
+        <div class="success-card" role="status" aria-live="polite">
+            <span class="success-mark" aria-hidden="true">✓</span>
+            <p class="application-kicker">Başvuru Alındı</p>
+            <h2>Başvurunuz başarıyla gönderildi.</h2>
+            <p>Değerlendirme ekibi bilgilerinizi Google Forms üzerinden aldı.</p>
+        </div>
+    </div>
+
+    <script src="../basvuru.js"></script>
+</body>
+</html>

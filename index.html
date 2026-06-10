@@ -1,0 +1,435 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <title>RETORİK - Adana Münazara Topluluğu</title>
+    <meta name="description" content="RETORİK, Adana merkezli münazara ve kişisel gelişim topluluğudur. Turnuvalar, eğitimler ve etkinliklerle düşünme ve ifade becerilerini güçlendirir." />
+    <meta name="theme-color" content="#8B1A1A" />
+    <link rel="icon" href="images/retorik-logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="images/retorik-logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <meta property="og:title" content="RETORİK - Adana Münazara Topluluğu" />
+    <meta property="og:description" content="RETORİK, Adana merkezli münazara ve kişisel gelişim topluluğudur. Turnuvalar, eğitimler ve etkinliklerle düşünme ve ifade becerilerini güçlendirir." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:image" content="images/retorik-logo.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="RETORİK - Adana Münazara Topluluğu" />
+    <meta name="twitter:description" content="RETORİK, Adana merkezli münazara ve kişisel gelişim topluluğudur. Turnuvalar, eğitimler ve etkinliklerle düşünme ve ifade becerilerini güçlendirir." />
+    <meta name="twitter:image" content="images/retorik-logo.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="team-styles.css" />
+    <link rel="stylesheet" href="card-buttons.css" />
+    <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="loading.css" />
+    <link rel="stylesheet" href="theme-refresh.css" />
+</head>
+
+<body>
+
+    <div id="loadingScreen">
+        <div class="loading-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        
+        <img src="images/retorik-logo.png" alt="RETORİK Logo" class="loading-logo">
+        <h1 class="loading-title">RETORİK</h1>
+        <p class="loading-subtitle">Münazara ve Kişisel Gelişim Kulübü</p>
+        <p>
+        </p>
+        <p class="loading-subtitle">Sözün Gücüyle Geleceği Keşfet.</p>
+        <div class="loading-bar"></div>
+    </div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo-link">
+                <img src="images/retorik-logo.png" class="logo-svg" alt="Retorik Logo">
+                <span class="logo-text">RETORİK</span>
+            </a>
+
+        <ul class="nav-links">
+                        <li><a href="#home" class="nav-link active">Anasayfa</a></li>
+                        <li><a href="#collections" class="nav-link">Etkinlikler</a></li>
+                        <li><a href="#featured" class="nav-link">Münazara</a></li>
+                        <li><a href="https://tab.retorikmunazara.com" class="nav-link" target="_blank">Tab</a></li>
+                        
+                        <li><a href="#team" class="nav-link">Ekibimiz</a></li>
+                        <li><a href="#contact" class="nav-link">İletişim</a></li>
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdi83qhSu9-QCt-uERF6Prb6z2-2zteZPO1VINrCgb5IDeXeQ/viewform?fbclid=PAb21jcANI2DFleHRuA2FlbQIxMQABp7i12Dt5nLpf1UBvo6l0nKPNYZFpwE-_4XeeLLpQEHVXjHn8kRc_bY8LBqaL_aem_VyE_UNixBk0VywwxJIImAA" class="nav-cta" target="_blank">Kulübe Başvur</a></li>
+                    </ul>
+
+            <div class="menu-toggle" id="menuToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <ul class="mobile-nav-links">
+            <li><a href="#home" class="mobile-nav-link">Anasayfa</a></li>
+            <li><a href="#collections" class="mobile-nav-link">Etkinlikler</a></li>
+            <li><a href="#featured" class="mobile-nav-link">Münazara</a></li>
+            <li><a href="#team" class="mobile-nav-link">Ekibimiz</a></li>
+            <li><a href="#contact" class="mobile-nav-link">İletişim</a></li>
+            <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdi83qhSu9-QCt-uERF6Prb6z2-2zteZPO1VINrCgb5IDeXeQ/viewform?fbclid=PAb21jcANI2DFleHRuA2FlbQIxMQABp7i12Dt5nLpf1UBvo6l0nKPNYZFpwE-_4XeeLLpQEHVXjHn8kRc_bY8LBqaL_aem_VyE_UNixBk0VywwxJIImAA" class="nav-cta mobile-nav-link" target="_blank">Kulübe Başvur</a></li>
+        </ul>
+    </div>
+
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+
+        <div class="hero-container">
+            <div class="hero-content-center">
+                <div class="hero-badge">2026 Yeni Dönem</div>
+
+                <h1 class="hero-title">
+                    Sözlerin Yarıştığı Yerde<br>
+                    <span class="accent">Gerçeklik Kazanır</span>
+                </h1>
+
+                <p class="hero-description">
+                    Retorik Münazara, eleştirel düşünceyi, etkili hitabeti ve entelektüel disiplini temel alan bir topluluktur.<br>
+                    Üyelerimizi yalnızca konuşan değil, fikrini temellendirebilen bireyler olarak yetiştiririz.
+                </p>
+
+                <div class="hero-stats">
+                    <div class="stat"><span class="stat-number">15+</span><span class="stat-label">Aktif Okul</span></div>
+                    <div class="stat"><span class="stat-number">200+</span><span class="stat-label">Genç Münazır</span></div>
+                    <div class="stat"><span class="stat-number">100%</span><span class="stat-label">Gelişim Odaklı</span></div>
+                </div>
+
+                <div class="cta-group">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="scroll-indicator"><span></span></div>
+    </section>
+
+    <section class="collections" id="collections">
+        <div class="section-header">
+            <h2 class="section-title">Etkinlikler & Turnuvalar</h2>
+            <p class="section-subtitle">Adana'da fikrin sesi ol</p>
+        </div>
+
+        <div class="category-tabs">
+            <button class="tab-btn active" data-category="turnuva">Turnuvalar</button>
+        </div>
+
+        <div class="grid" id="collectionsGrid">
+            <div class="collection-card has-cta" data-category="turnuva">
+                <div class="collection-thumbnail">
+                    <img src="images/cgm.jpg" alt="Çukurova Genç Meclis Demo" />
+                </div>
+                <div class="card-content">
+                    <span class="card-badge">RETORİK</span>
+                    <h3 class="card-title">Çukurova Genç Meclis Demo</h3>
+                    <p class="card-subtitle">TBMM simülasyonu — gençlere parlamento deneyimi sağlamak amaçlı demo etkinlik.</p>
+                    <p class="card-status"><b>14 Haziran 2026</b></p>
+                    <button type="button" onclick="showCGMPopup()" class="apply-btn">Başvuru Yap</button>
+                </div>
+            </div>
+
+            <div class="collection-card no-cta" data-category="turnuva">
+                <div class="collection-thumbnail">
+                    <img src="images/agora.jpg" alt="Agora Debate Forum" />
+                </div>
+                <div class="card-content">
+                    <span class="card-badge">RETORİK</span>
+                    <h3 class="card-title">Agora Debate Forum</h3>
+                    <p class="card-subtitle">Düşünen zihinlerden güçlü seslere uzanan bir yolculuk başlıyor. Agora Debate Forum, kelimelerin ötesinde bir anlam taşır.</p>
+                    <p class="card-status"><b>Tamamlandı</b></p>
+                </div>
+            </div>
+
+            <div class="collection-card has-cta" data-category="turnuva">
+                <div class="collection-thumbnail">
+                    <img src="images/ocd.png" alt="RETORİK OCD Turnuvası" />
+                </div>
+                <div class="card-content">
+                    <span class="card-badge">RETORİK</span>
+                    <h3 class="card-title">Open Council Debate (OCD)</h3>
+                    <p class="card-subtitle">Retorik tarafından geliştirilen özel münazara sistemi.</p>
+                    <p class="card-status"><b>Tamamlandı</b></p>
+                </div>
+            </div>
+
+            <div class="collection-card no-cta" data-category="turnuva">
+                <div class="collection-thumbnail">
+                    <img src="images/open25.jpg" alt="Retorik Open 25" />
+                </div>
+                <div class="card-content">
+                    <span class="card-badge">RETORIK</span>
+                    <h3 class="card-title">Retorik Open 25</h3>
+                    <p class="card-subtitle">Retorik Open 25, yalnızca bir yarışma olmanın ötesinde; öğrenmeyi, fikir üretimini ve düşünsel derinliği teşvik eder.</p>
+                    <p class="card-status"><b>Tamamlandı</b></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured" id="featured">
+        <div class="featured-container">
+            <div class="featured-hero">
+
+                <div class="featured-content">
+                    <span class="label">Münazara Kültürü</span>
+                    <h2>İngiliz Parlamenter Sistem</h2>
+
+                    <p>Bu sistemde iki taraf vardır: Hükümet ve Muhalefet. Her biri açılış ve kapanış takımlarından oluşur.</p>
+
+                    <div class="feature-highlights">
+
+                        <div class="highlight-item">
+                            <div class="highlight-icon"><img src="icons/brain.svg" class="icon"></div>
+                            <div class="highlight-title">Eleştirel Düşünme</div>
+                            <div class="highlight-desc">Analiz ve yorum becerisi gelişir.</div>
+                        </div>
+
+                        <div class="highlight-item">
+                            <div class="highlight-icon"><img src="icons/speech.svg" class="icon"></div>
+                            <div class="highlight-title">Etkili İfade</div>
+                            <div class="highlight-desc">Anlatım ve ikna becerileri güçlenir.</div>
+                        </div>
+
+                        <div class="highlight-item">
+                            <div class="highlight-icon"><img src="icons/team.svg" class="icon"></div>
+                            <div class="highlight-title">İşbirliği</div>
+                            <div class="highlight-desc">Takım içi koordinasyon gelişir.</div>
+                        </div>
+
+                    </div>
+
+                    <a href="#collections" class="feature-cta">Etkinlik Takvimini Gör</a>
+                </div>
+
+                <div class="featured-image-section">
+                    <div class="hero-carousel">
+                        <div class="carousel-slide active">
+                            <img src="images/retorik4.jpg" alt="RETORİK Görsel 1" />
+                        </div>
+
+                        <div class="carousel-slide">
+                            <img src="images/retorik3.jpg" alt="RETORİK Görsel 2" />
+                        </div>
+
+                        <div class="carousel-slide">
+                            <img src="images/retorik2.jpg" alt="RETORİK Görsel 3" />
+                        </div>
+
+                        <div class="carousel-indicators">
+                            <div class="indicator active"></div>
+                            <div class="indicator"></div>
+                            <div class="indicator"></div>
+                        </div>
+
+                        <div class="carousel-overlay"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="team" id="team">
+        <div class="team-container">
+            <div class="section-header">
+                <h2 class="section-title">Yönetim Kurulu</h2>
+                <p class="section-subtitle">RETORİK'i birlikte inşa ediyoruz</p>
+            </div>
+
+            <div class="team-carousel-wrapper">
+                <button class="team-nav-btn prev" id="teamPrev">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button> 
+
+                <div class="team-carousel" id="teamCarousel">
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="images/elif.jpg" alt="Elif Adıgüzel" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="avatar-placeholder" style="display:none;">EA</div>
+                        </div>
+                        <h3 class="member-name">Elif Adıgüzel</h3>
+                        <p class="member-role">Başkan</p>
+                    </div>
+
+                    
+
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="images/eda.jpg" alt="Eda Kankılıç" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="avatar-placeholder" style="display:none;">EK</div>
+                        </div>
+                        <h3 class="member-name">Eda Kankılıç</h3>
+                        <p class="member-role">Başkan</p>
+                    </div>
+
+                    
+
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="images/toprakefe.jpg" alt="Toprak Efe Ceren" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="avatar-placeholder" style="display:none;">TC</div>
+                        </div>
+                        <h3 class="member-name">Toprak Efe Ceren</h3>
+                        <p class="member-role">Finans Sorumlusu</p>
+                    </div>
+
+                    
+
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="images/durumelisa.jpg" alt="Duru Melisa Güngör" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="avatar-placeholder" style="display:none;">DG</div>
+                        </div>
+                        <h3 class="member-name">Duru Melisa Güngör</h3>
+                        <p class="member-role">Halkla İlişkiler Sorumlusu</p>
+                    </div>
+
+                    
+
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="images/umut.jpg" alt="Umut Egemen Tufan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="avatar-placeholder" style="display:none;">UT</div>
+                        </div>
+                        <h3 class="member-name">Umut Egemen Tufan</h3>
+                        <p class="member-role">Konu ve İçerik Sorumlusu</p>
+                    </div>
+
+                    
+
+                    
+
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="images/ömer.jpg" alt="Ömer Olcars" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="avatar-placeholder" style="display:none;">ÖO</div>
+                        </div>
+                        <h3 class="member-name">Ömer Olcars</h3>
+                        <p class="member-role">Sosyal Medya Sorumlusu</p>
+                    </div>
+
+                </div>
+
+                <button class="team-nav-btn next" id="teamNext">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact section removed; social links moved to footer -->
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>RETORİK</h3>
+                <p>Gençlerin düşünme ve ifade becerisini güçlendiren topluluk.</p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Topluluk</h4>
+                <ul>
+                    <li><a href="#home">Anasayfa</a></li>
+                    <li><a href="#collections">Etkinlikler</a></li>
+                    <li><a href="#featured">Münazara Sistemi</a></li>
+                    <li><a href="#team">Ekibimiz</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>İletişim</h4>
+                <ul>
+                    <li>
+                        <a href="https://www.tiktok.com/@retorik.munazara" target="_blank">
+                            <img src="icons/tiktok.svg" class="icon" alt="TikTok"> @retorik.munazara
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://instagram.com/retorik.munazara" target="_blank">
+                            <img src="icons/instagram.svg" class="icon" alt="Instagram"> @retorik.munazara
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:retorikmunazara01@gmail.com">
+                            <img src="icons/mail.svg" class="icon" alt="E-posta"> retorikmunazara01@gmail.com
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 RETORİK. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+
+    <div id="agoraPopup" class="popup-overlay">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closeAgoraPopup()">&times;</button>
+            <div class="popup-header">
+                <h2>Agora Debate Forum</h2>
+                <p>16-17 Mayıs 2026 tarihlerindeki Agora etkinliği tamamlanmıştır. İlginize teşekkür ederiz.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="ocdPopup" class="popup-overlay">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closeOCDPopup()">&times;</button>
+            <div class="popup-header">
+                <h2>OCD Başvuru</h2>
+                <p>Kontenjanımız dolmuştur. İlginiz için teşekkür ederiz!</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="cgmPopup" class="popup-overlay">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closeCGMPopup()">&times;</button>
+            <div class="popup-header">
+                <h2>Çukurova Genç Meclis Demo</h2>
+                <p>14 Haziran 2026 - TBMM Simülasyonu. Katılım türünü seçiniz.</p>
+            </div>
+
+            <div class="popup-buttons">
+                <a href="gencmeclis/basvuru/#vekil" class="popup-btn popup-btn-primary">
+                    <span class="btn-icon">
+                        <img src="icons/user.svg" alt="Vekil" />
+                    </span>
+                    <span class="btn-text">Vekil Başvurusu</span>
+                </a>
+
+                <a href="gencmeclis/basvuru/#orga" class="popup-btn popup-btn-secondary">
+                    <span class="btn-icon">
+                        <img src="icons/team.svg" alt="Orga" />
+                    </span>
+                    <span class="btn-text">Organizasyon Başvurusu</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+
+</body>
+</html>

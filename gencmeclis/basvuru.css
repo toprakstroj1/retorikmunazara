@@ -1,0 +1,505 @@
+.gencmeclis-page {
+    min-height: 100vh;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(139, 26, 26, 0.28), transparent 34rem),
+        linear-gradient(180deg, #000 0%, #0a0a0a 48%, #000 100%);
+}
+
+.gencmeclis-page h1,
+.gencmeclis-page h2,
+.gencmeclis-page h3,
+.gencmeclis-page .logo-text,
+.choice-number,
+.success-card h2 {
+    font-family: "Sora", "Inter", system-ui, sans-serif;
+    letter-spacing: 0;
+}
+
+.gencmeclis-page::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.12;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
+
+.application-container {
+    width: min(100% - 40px, 1180px);
+    margin: 0 auto;
+}
+
+.application-hero {
+    position: relative;
+    min-height: 62vh;
+    display: grid;
+    place-items: center;
+    padding: 150px 0 80px;
+    overflow: hidden;
+}
+
+.application-hero::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    width: min(760px, 80vw);
+    height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, rgba(139, 26, 26, 0.9), transparent);
+}
+
+.hero-orbit {
+    position: absolute;
+    width: min(560px, 82vw);
+    aspect-ratio: 1;
+    border: 1px solid rgba(139, 26, 26, 0.22);
+    border-radius: 50%;
+    animation: orbitPulse 5.5s ease-in-out infinite;
+}
+
+.hero-orbit::before,
+.hero-orbit::after {
+    content: '';
+    position: absolute;
+    inset: 12%;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+}
+
+.hero-orbit::after {
+    inset: 27%;
+    border-color: rgba(139, 26, 26, 0.38);
+    animation: orbitSpin 10s linear infinite;
+}
+
+.application-hero .application-container {
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    text-align: center;
+    animation: riseIn 0.8s ease both;
+}
+
+.application-kicker {
+    color: var(--accent-light);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.application-hero h1 {
+    margin: 18px 0;
+    font-size: clamp(42px, 7vw, 86px);
+    line-height: 0.95;
+    letter-spacing: 0;
+}
+
+.application-hero p {
+    max-width: 680px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.application-picker {
+    padding: 20px 0 70px;
+}
+
+.picker-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+}
+
+.application-choice-card,
+.application-form-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(26, 26, 26, 0.96), rgba(4, 4, 4, 0.98));
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.46);
+}
+
+.application-choice-card {
+    min-height: 360px;
+    padding: 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 28px;
+    transform: translateY(24px);
+    opacity: 0;
+    animation: riseIn 0.72s ease forwards;
+}
+
+.application-choice-card:nth-child(2) {
+    animation-delay: 0.14s;
+}
+
+.application-choice-card::before,
+.application-form-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 24%, rgba(139, 26, 26, 0.13) 48%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.8s ease;
+}
+
+.application-choice-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(139, 26, 26, 0.45);
+    box-shadow: 0 24px 55px rgba(139, 26, 26, 0.25);
+}
+
+.application-choice-card:hover::before,
+.application-form-card.is-opening::before {
+    transform: translateX(100%);
+}
+
+.choice-number {
+    position: absolute;
+    right: 24px;
+    top: 22px;
+    color: rgba(255, 255, 255, 0.08);
+    font-size: 76px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.application-choice-card h2 {
+    margin: 18px 0 12px;
+    font-size: clamp(26px, 3vw, 42px);
+    letter-spacing: 0;
+}
+
+.application-choice-card p:not(.card-badge) {
+    max-width: 520px;
+    color: rgba(255, 255, 255, 0.68);
+    line-height: 1.7;
+}
+
+.application-choice-card .apply-btn {
+    width: fit-content;
+    min-width: 220px;
+    margin-top: auto;
+}
+
+.application-form-stage {
+    padding: 10px 0 100px;
+}
+
+.application-form-card {
+    padding: 34px;
+    animation: formBloom 0.54s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.form-panel-head {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.form-panel-head h2 {
+    margin-top: 10px;
+    font-size: clamp(28px, 4vw, 48px);
+}
+
+.form-close {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(139, 26, 26, 0.5);
+    background: rgba(139, 26, 26, 0.12);
+    color: white;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.form-close:hover {
+    transform: rotate(90deg) scale(1.06);
+    background: rgba(139, 26, 26, 0.28);
+}
+
+.gencmeclis-form,
+.form-grid,
+.form-actions,
+.form-consents {
+    position: relative;
+    z-index: 1;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.form-grid label,
+.form-consents label {
+    display: grid;
+    gap: 9px;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+.form-grid input,
+.form-grid select,
+.form-grid textarea {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.42);
+    color: white;
+    padding: 14px 15px;
+    font: inherit;
+    letter-spacing: 0;
+    text-transform: none;
+    outline: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.form-grid textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.form-grid input:focus,
+.form-grid select:focus,
+.form-grid textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(139, 26, 26, 0.22);
+    transform: translateY(-2px);
+}
+
+.form-wide {
+    grid-column: 1 / -1;
+}
+
+.form-consents {
+    display: grid;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.form-consents label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    text-transform: none;
+    letter-spacing: 0.2px;
+    line-height: 1.5;
+}
+
+.form-consents input {
+    margin-top: 2px;
+    accent-color: var(--accent);
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 26px;
+}
+
+.gencmeclis-form.is-sending .form-submit {
+    pointer-events: none;
+    opacity: 0.78;
+}
+
+.form-status {
+    display: block;
+    min-height: 20px;
+    margin-top: 0;
+    padding: 0;
+    border: 0;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+.success-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.84);
+    backdrop-filter: blur(14px);
+    animation: overlayFade 0.28s ease both;
+}
+
+.success-overlay[hidden] {
+    display: none;
+}
+
+.success-card {
+    width: min(100%, 520px);
+    padding: 44px 34px;
+    text-align: center;
+    border-radius: 14px;
+    border: 1px solid rgba(139, 26, 26, 0.42);
+    background: linear-gradient(180deg, #191919, #050505);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.7);
+    animation: successPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.success-mark {
+    display: grid;
+    place-items: center;
+    width: 78px;
+    height: 78px;
+    margin: 0 auto 22px;
+    border-radius: 50%;
+    color: white;
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    font-size: 44px;
+    box-shadow: 0 0 0 12px rgba(139, 26, 26, 0.15);
+}
+
+.success-card h2 {
+    margin: 12px 0 10px;
+    font-size: clamp(28px, 5vw, 42px);
+}
+
+.success-card p:last-child {
+    color: rgba(255, 255, 255, 0.68);
+}
+
+.confetti-piece {
+    position: fixed;
+    top: -18px;
+    left: var(--x);
+    z-index: 100000;
+    width: 10px;
+    height: 18px;
+    border-radius: 2px;
+    background: var(--c);
+    pointer-events: none;
+    animation: confettiFall var(--d) ease-in forwards;
+}
+
+@keyframes riseIn {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes formBloom {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes orbitPulse {
+    0%, 100% {
+        transform: scale(0.98);
+        opacity: 0.55;
+    }
+    50% {
+        transform: scale(1.04);
+        opacity: 0.85;
+    }
+}
+
+@keyframes orbitSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes overlayFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes successPop {
+    from {
+        opacity: 0;
+        transform: translateY(22px) scale(0.86);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes confettiFall {
+    to {
+        transform: translate(var(--drift), 108vh) rotate(680deg);
+        opacity: 0.15;
+    }
+}
+
+@media (max-width: 800px) {
+    .gencmeclis-page nav {
+        padding: 16px 20px;
+    }
+
+    .gencmeclis-page .nav-links {
+        display: none;
+    }
+
+    .application-hero {
+        min-height: auto;
+        padding: 130px 0 62px;
+    }
+
+    .picker-grid,
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .application-choice-card,
+    .application-form-card {
+        padding: 24px;
+    }
+
+    .application-choice-card .apply-btn {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .form-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .form-submit {
+        width: 100%;
+    }
+}

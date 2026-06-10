@@ -1,0 +1,664 @@
+/* MOBILE-FIRST OPTIMIZED STYLES */
+/* Bu dosya sadece mobil cihazlarda yüklenir */
+
+:root {
+    --mobile-padding: 20px;
+    --mobile-section-gap: 60px;
+}
+
+/* Mobile Body Override */
+body.mobile-device {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Mobile Navigation - Daha büyük touch targets */
+body.mobile-device nav {
+    padding: 12px 20px;
+}
+
+body.mobile-device .logo-svg {
+    width: 35px;
+    height: 35px;
+}
+
+body.mobile-device .logo-text {
+    font-size: 22px;
+}
+
+/* Mobile Hero - Tam ekran optimizasyonu */
+body.mobile-device .hero {
+    min-height: 100vh;
+    height: auto;
+}
+
+body.mobile-device .hero-container {
+    padding: 0 var(--mobile-padding);
+    padding-top: 100px;
+}
+
+body.mobile-device .hero-content-center {
+    padding-top: 20px;
+    max-width: 100%;
+}
+
+body.mobile-device .hero-badge {
+    padding: 6px 16px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+body.mobile-device .hero-title {
+    font-size: clamp(32px, 10vw, 42px) !important;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+body.mobile-device .hero-description {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+
+/* Mobile Stats - Dikey yerleşim */
+body.mobile-device .hero-stats {
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 35px;
+    padding: 0 20px;
+}
+
+body.mobile-device .stat {
+    width: 100%;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+body.mobile-device .stat-number {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+body.mobile-device .stat-label {
+    font-size: 11px;
+}
+
+/* Mobile CTA Buttons - Stack vertical */
+body.mobile-device .cta-group {
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 20px;
+}
+
+body.mobile-device .cta-button {
+    width: 100%;
+    padding: 16px 30px;
+    font-size: 13px;
+}
+
+/* Mobile Scroll Indicator */
+body.mobile-device .scroll-indicator {
+    bottom: 20px;
+}
+
+/* Mobile Sections - Tighter spacing */
+body.mobile-device .collections,
+body.mobile-device .featured,
+body.mobile-device .team,
+body.mobile-device .contact {
+    padding: var(--mobile-section-gap) var(--mobile-padding) 50px;
+}
+
+body.mobile-device section {
+    scroll-margin-top: 60px;
+}
+
+/* Mobile Section Headers */
+body.mobile-device .section-title {
+    font-size: 32px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+body.mobile-device .section-subtitle {
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+/* Mobile Category Tabs */
+body.mobile-device .category-tabs {
+    gap: 12px;
+    padding: 0 10px;
+    margin-bottom: 30px;
+}
+
+body.mobile-device .tab-btn {
+    padding: 10px 20px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+
+/* Mobile Collection Grid - Single column */
+body.mobile-device .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+body.mobile-device .collection-card {
+    border-radius: 12px;
+}
+
+body.mobile-device .collection-thumbnail {
+    height: 220px;
+    border-radius: 12px 12px 0 0;
+}
+
+body.mobile-device .card-content {
+    padding: 20px;
+}
+
+body.mobile-device .card-badge {
+    font-size: 9px;
+    padding: 4px 10px;
+}
+
+body.mobile-device .card-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+body.mobile-device .card-subtitle {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+body.mobile-device .card-price {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+body.mobile-device .apply-btn {
+    padding: 14px 25px;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+/* Mobile Featured Section */
+body.mobile-device .featured {
+    padding: var(--mobile-section-gap) var(--mobile-padding) 50px;
+}
+
+body.mobile-device .featured-hero {
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+body.mobile-device .featured-content {
+    padding: 0;
+    order: 2;
+}
+
+body.mobile-device .featured-image-section {
+    order: 1;
+    height: 280px;
+    border-radius: 12px;
+    width: 100%;
+    margin: 0 -20px;
+    width: calc(100% + 40px);
+}
+
+body.mobile-device .featured-content h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+body.mobile-device .featured-content .label {
+    font-size: 11px;
+    margin-bottom: 15px;
+}
+
+body.mobile-device .featured-content p {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* Mobile Feature Highlights - Single column */
+body.mobile-device .feature-highlights {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+body.mobile-device .highlight-item {
+    padding: 20px;
+}
+
+body.mobile-device .highlight-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 15px;
+}
+
+body.mobile-device .highlight-title {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+body.mobile-device .highlight-desc {
+    font-size: 13px;
+}
+
+body.mobile-device .feature-cta {
+    padding: 16px 40px;
+    font-size: 12px;
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+/* Mobile Featured Image - Carousel Optimizasyonu */
+body.mobile-device .hero-carousel {
+    border-radius: 12px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+body.mobile-device .carousel-slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+body.mobile-device .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+body.mobile-device .carousel-overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 30%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+body.mobile-device .carousel-indicators {
+    bottom: 15px;
+    gap: 8px;
+    z-index: 20;
+}
+
+body.mobile-device .indicator {
+    width: 35px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.mobile-device .indicator.active {
+    width: 50px;
+    background: var(--accent);
+    box-shadow: 0 2px 12px rgba(139, 26, 26, 0.6);
+}
+
+/* Mobile Team Section */
+body.mobile-device .team-carousel-wrapper {
+    padding: 0 45px;
+}
+
+body.mobile-device .team-member {
+    flex: 0 0 240px;
+    padding: 30px 20px;
+}
+
+body.mobile-device .member-avatar {
+    width: 110px;
+    height: 110px;
+    margin-bottom: 20px;
+}
+
+body.mobile-device .avatar-placeholder {
+    font-size: 32px;
+}
+
+body.mobile-device .member-name {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+body.mobile-device .member-role {
+    font-size: 12px;
+}
+
+body.mobile-device .team-nav-btn {
+    width: 40px;
+    height: 40px;
+}
+
+/* Mobile Contact Section */
+body.mobile-device .contact-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+body.mobile-device .contact-form-wrapper,
+body.mobile-device .contact-info {
+    padding: 30px 20px;
+}
+
+body.mobile-device .form-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+body.mobile-device .form-group {
+    margin-bottom: 20px;
+}
+
+body.mobile-device .form-group label {
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+
+body.mobile-device .form-group input,
+body.mobile-device .form-group textarea {
+    padding: 14px;
+    font-size: 15px;
+}
+
+body.mobile-device .form-submit {
+    padding: 16px 40px;
+    font-size: 13px;
+}
+
+body.mobile-device .info-item {
+    margin-bottom: 30px;
+    gap: 15px;
+}
+
+body.mobile-device .info-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+}
+
+body.mobile-device .info-content h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+body.mobile-device .info-content p {
+    font-size: 14px;
+}
+
+/* Mobile Footer */
+body.mobile-device footer {
+    padding: 60px var(--mobile-padding) 30px;
+}
+
+body.mobile-device .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+body.mobile-device .footer-brand h3 {
+    font-size: 26px;
+}
+
+body.mobile-device .footer-brand p {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+body.mobile-device .footer-column h4 {
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+body.mobile-device .footer-column a {
+    font-size: 14px;
+    padding: 6px 0;
+}
+
+body.mobile-device .footer-bottom {
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 20px;
+}
+
+body.mobile-device .footer-bottom p {
+    font-size: 13px;
+}
+
+/* Mobile Popup Modal */
+body.mobile-device #ocdPopup .popup-content {
+    padding: 35px 20px;
+    margin: 10px;
+    max-width: calc(100% - 20px);
+}
+
+body.mobile-device #ocdPopup .popup-header h2 {
+    font-size: 24px;
+}
+
+body.mobile-device #ocdPopup .popup-header p {
+    font-size: 13px;
+}
+
+body.mobile-device #ocdPopup .popup-btn {
+    padding: 15px 20px;
+    font-size: 14px;
+    gap: 10px;
+}
+
+body.mobile-device #ocdPopup .btn-icon {
+    font-size: 18px;
+}
+
+body.mobile-device #ocdPopup .popup-close {
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+}
+
+/* Mobile Loading Screen */
+body.mobile-device .loading-logo {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 25px;
+}
+
+body.mobile-device .loading-title {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+body.mobile-device .loading-subtitle {
+    font-size: 13px;
+    letter-spacing: 2px;
+    padding: 0 20px;
+}
+
+body.mobile-device .loading-bar {
+    width: 250px;
+    margin-top: 30px;
+}
+
+/* Mobile Touch Optimizations */
+body.mobile-device a,
+body.mobile-device button,
+body.mobile-device .nav-link {
+    -webkit-tap-highlight-color: rgba(139, 26, 26, 0.2);
+}
+
+body.mobile-device * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+body.mobile-device input,
+body.mobile-device textarea {
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+/* Smooth scrolling for mobile */
+body.mobile-device {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile specific animations - lighter */
+@media (prefers-reduced-motion: reduce) {
+    body.mobile-device * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Better mobile icon rendering */
+body.mobile-device .icon {
+    width: 24px;
+    height: 24px;
+}
+
+body.mobile-device .highlight-icon .icon {
+    width: 28px;
+    height: 28px;
+}
+
+body.mobile-device .info-icon .icon {
+    width: 26px;
+    height: 26px;
+}
+
+/* Mobile nav CTA adjustments */
+body.mobile-device .nav-cta,
+body.mobile-device .nav-cta-outline {
+    font-size: 11px;
+    padding: 8px 18px !important;
+}
+
+/* Mobile Hamburger Menu - Geliştirilmiş */
+body.mobile-device .menu-toggle {
+    display: flex;
+    width: 30px;
+    height: 30px;
+}
+
+body.mobile-device .menu-toggle span {
+    width: 100%;
+    height: 3px;
+}
+
+/* Mobile Navigation Links - Desktop'ta gizle */
+body.mobile-device .nav-links {
+    display: none;
+}
+
+/* Bize Ulaşın butonunu mobilde gizle */
+body.mobile-device .nav-cta-outline {
+    display: none !important;
+}
+
+/* Mobile menu overlay - Tam ekran */
+body.mobile-device .mobile-nav {
+    display: block;
+}
+
+body.mobile-device .mobile-nav.active {
+    right: 0;
+}
+
+body.mobile-device .mobile-nav-links {
+    padding: 20px;
+    gap: 25px;
+}
+
+body.mobile-device .mobile-nav-links a {
+    font-size: 20px;
+    letter-spacing: 2px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+    text-align: center;
+}
+
+body.mobile-device .mobile-nav-links a:hover {
+    color: var(--accent);
+    transform: translateX(0) scale(1.05);
+}
+
+/* Mobile nav'da CTA butonlarını özel stil */
+body.mobile-device .mobile-nav-links .nav-cta,
+body.mobile-device .mobile-nav-links .nav-cta-outline {
+    display: inline-block;
+    padding: 14px 30px !important;
+    font-size: 14px;
+    border-radius: 25px;
+    margin-top: 10px;
+    width: auto;
+    border-bottom: none;
+}
+
+/* Extra small mobil cihazlar için (375px ve altı) */
+@media (max-width: 375px) {
+    body.mobile-device .featured-image-section {
+        height: 240px;
+        margin: 0 -10px;
+        width: calc(100% + 20px);
+    }
+    
+    body.mobile-device .hero-title {
+        font-size: clamp(28px, 9vw, 36px) !important;
+    }
+    
+    body.mobile-device .section-title {
+        font-size: 28px;
+    }
+    
+    body.mobile-device .stat {
+        padding: 12px;
+    }
+    
+    body.mobile-device .collection-thumbnail {
+        height: 200px;
+    }
+}
+
+/* Büyük ekranlı mobil cihazlar için (414px - 768px) */
+@media (min-width: 414px) and (max-width: 768px) {
+    body.mobile-device .featured-image-section {
+        height: 320px;
+    }
+    
+    body.mobile-device .hero-title {
+        font-size: clamp(38px, 9vw, 48px) !important;
+    }
+    
+    body.mobile-device .section-title {
+        font-size: 36px;
+    }
+    
+    body.mobile-device .collection-thumbnail {
+        height: 250px;
+    }
+    
+    body.mobile-device .stat {
+        padding: 18px;
+    }
+    
+    body.mobile-device .stat-number {
+        font-size: 36px;
+    }
+}

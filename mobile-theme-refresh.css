@@ -1,0 +1,144 @@
+/* Mobile polish for the refreshed RETORIK theme */
+body.mobile-device {
+    font-family: var(--font-body);
+    background:
+        radial-gradient(circle at top left, rgba(139, 26, 26, 0.24), transparent 24rem),
+        linear-gradient(180deg, #030303 0%, #090909 54%, #030303 100%);
+}
+
+body.mobile-device nav {
+    padding: 12px 18px;
+    background: rgba(4, 4, 4, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+body.mobile-device .logo-text {
+    font-family: var(--font-display);
+    font-size: 21px;
+    letter-spacing: 0.08em;
+}
+
+body.mobile-device .mobile-nav {
+    background:
+        radial-gradient(circle at top, rgba(139, 26, 26, 0.22), transparent 24rem),
+        rgba(3, 3, 3, 0.98);
+}
+
+body.mobile-device .mobile-nav-links a {
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 0.12em;
+}
+
+body.mobile-device .hero-container {
+    padding-top: 112px;
+}
+
+body.mobile-device .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(34px, 11vw, 48px) !important;
+    line-height: 1.06;
+    letter-spacing: 0;
+}
+
+body.mobile-device .hero-description {
+    color: rgba(248, 248, 248, 0.7);
+    padding: 0;
+}
+
+body.mobile-device .hero-stats {
+    gap: 14px;
+    padding: 0;
+}
+
+body.mobile-device .stat {
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.mobile-device .collections,
+body.mobile-device .featured,
+body.mobile-device .team,
+body.mobile-device .contact {
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+body.mobile-device .section-title,
+body.mobile-device .featured-content h2,
+body.mobile-device .contact-header .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(29px, 9vw, 38px);
+    line-height: 1.08;
+    letter-spacing: 0;
+}
+
+body.mobile-device .section-subtitle,
+body.mobile-device .hero-badge,
+body.mobile-device .featured-content .label {
+    letter-spacing: 0.12em;
+}
+
+body.mobile-device .category-tabs {
+    width: 100%;
+    padding: 7px;
+}
+
+body.mobile-device .tab-btn {
+    flex: 1;
+    border-radius: 999px;
+}
+
+body.mobile-device .collection-card,
+body.mobile-device .team-member,
+body.mobile-device .contact-form-wrapper,
+body.mobile-device .contact-info {
+    border-radius: 12px;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.36);
+}
+
+body.mobile-device .card-content {
+    padding: 22px;
+}
+
+body.mobile-device .card-title,
+body.mobile-device .member-name {
+    font-family: var(--font-display);
+    letter-spacing: 0;
+}
+
+body.mobile-device .feature-highlights {
+    gap: 14px;
+}
+
+body.mobile-device .highlight-item {
+    border-radius: 12px;
+}
+
+body.mobile-device .featured-image-section {
+    margin: 0;
+    width: 100%;
+    border-radius: 12px;
+}
+
+body.mobile-device .team-carousel-wrapper {
+    padding: 0 44px;
+}
+
+body.mobile-device .form-group input,
+body.mobile-device .form-group textarea {
+    border-radius: 8px;
+}
+
+body.mobile-device footer {
+    background:
+        radial-gradient(circle at top left, rgba(139, 26, 26, 0.16), transparent 22rem),
+        #030303;
+}
+
+body.mobile-device #cgmPopup .popup-content,
+body.mobile-device #ocdPopup .popup-content {
+    border-radius: 12px;
+    padding: 34px 22px;
+}

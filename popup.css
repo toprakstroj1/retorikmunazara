@@ -1,0 +1,262 @@
+/* POPUP MODAL - STANDALONE */
+#ocdPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(10px);
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#ocdPopup.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+#ocdPopup .popup-content {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    padding: 50px 40px;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8), 
+                0 0 0 1px rgba(139, 26, 26, 0.3);
+    transform: scale(0.8);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#ocdPopup.active .popup-content {
+    transform: scale(1);
+}
+
+#ocdPopup .popup-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(139, 26, 26, 0.1);
+    border: 2px solid rgba(139, 26, 26, 0.3);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #8B1A1A;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+#ocdPopup .popup-close:hover {
+    background: rgba(139, 26, 26, 0.2);
+    border-color: #8B1A1A;
+    transform: rotate(90deg) scale(1.1);
+}
+
+#ocdPopup .popup-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+#ocdPopup .popup-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: white;
+    letter-spacing: -1px;
+}
+
+#ocdPopup .popup-header p {
+    color: #999;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#ocdPopup .popup-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#ocdPopup .popup-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 30px;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#ocdPopup .popup-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+#ocdPopup .popup-btn:hover::before {
+    left: 100%;
+}
+
+#ocdPopup .popup-btn-primary {
+    background: linear-gradient(135deg, #8B1A1A 0%, #A52A2A 100%);
+    color: white;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 15px rgba(139, 26, 26, 0.4);
+}
+
+#ocdPopup .popup-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(139, 26, 26, 0.5);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+#ocdPopup .popup-btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+#ocdPopup .popup-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #8B1A1A;
+    transform: translateY(-2px);
+}
+
+#ocdPopup .btn-icon {
+    font-size: 20px;
+}
+
+#ocdPopup .btn-text {
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+    #ocdPopup .popup-content {
+        padding: 40px 25px;
+        max-width: 95%;
+    }
+    
+    #ocdPopup .popup-header h2 {
+        font-size: 26px;
+    }
+    
+    #ocdPopup .popup-btn {
+        padding: 16px 25px;
+        font-size: 15px;
+    }
+    
+    #ocdPopup .btn-icon {
+        font-size: 18px;
+    }
+}
+
+/* SVG icon sizing and appearance for popup buttons and banners */
+.popup-btn .btn-icon svg,
+.btn-icon svg,
+.popup-btn .btn-icon img,
+.btn-icon img {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.device-info-banner .close-banner svg,
+.close-banner svg {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: middle;
+    fill: #fff;
+}
+
+/* CGM Popup uses same styles as OCD popup */
+#cgmPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(10px);
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#cgmPopup.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+#cgmPopup .popup-content {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    padding: 50px 40px;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8), 
+                0 0 0 1px rgba(139, 26, 26, 0.3);
+    transform: scale(0.8);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#cgmPopup.active .popup-content {
+    transform: scale(1);
+}
+
+#cgmPopup .popup-close { }
+
+#cgmPopup .popup-header { text-align:center; margin-bottom:20px; }
+
+#cgmPopup .popup-buttons { display:flex; flex-direction:column; gap:15px; }
+
+#cgmPopup .popup-btn { display:flex; align-items:center; justify-content:center; gap:12px; padding:16px 28px; border-radius:12px; font-weight:600; text-decoration:none; }
+
+#cgmPopup .popup-btn-primary { background: linear-gradient(135deg, #8B1A1A 0%, #A52A2A 100%); color:white; }
+
+#cgmPopup .popup-btn-secondary { background: rgba(255,255,255,0.04); color:white; border:2px solid rgba(255,255,255,0.08); }
+
+@media (max-width:768px) {
+    #cgmPopup .popup-content { padding: 30px 20px; }
+    #cgmPopup .popup-btn { padding:14px 20px; }
+}
