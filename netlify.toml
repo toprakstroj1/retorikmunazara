@@ -1,0 +1,8 @@
+[build]
+  publish = "."
+  command = "python scripts/build.py"
+
+[[redirects]]
+  from = "/konferanslar/:slug/basvuru"
+  to = "/konferanslar/:slug/"
+  status = 301
