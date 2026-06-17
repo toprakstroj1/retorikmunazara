@@ -1,0 +1,13 @@
+{
+  "name": "retorikmunazara",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@netlify/blobs": "^9.1.0",
+    "@netlify/functions": "^3.1.10"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.3"
+  }
+}

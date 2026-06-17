@@ -26,9 +26,15 @@ Bu ayarlar `netlify.toml` içine de eklendi.
 
 ## Telegram botu için gerekli değişkenler
 
-Botu ücretsiz bir worker ortamında çalıştırman gerekir. Render, Koyeb veya Railway free plan gibi bir servis kullanabilirsin. Bot polling ile çalışır, webhook gerekmez.
+Bot artık 7/24 çalışan ayrı bir Python worker istemez. Telegram mesajları doğrudan Netlify Function'a gelir:
 
-Gerekli environment variables:
+```text
+/api/telegram
+```
+
+Netlify sadece mesaj geldiğinde fonksiyonu çalıştırır. Bu yüzden Render gibi sürekli çalışan servis gerekmez.
+
+Netlify > Site configuration > Environment variables bölümüne şunları ekle:
 
 ```text
 TELEGRAM_BOT_TOKEN=BotFather'dan aldığın token
@@ -36,6 +42,7 @@ TELEGRAM_ADMIN_IDS=telegram_id_1,telegram_id_2
 GITHUB_TOKEN=GitHub fine-grained personal access token
 GITHUB_REPO=kullaniciadi/repo-adi
 GITHUB_BRANCH=main
+TELEGRAM_WEBHOOK_SECRET=uzun-rastgele-bir-yazi
 ```
 
 `TELEGRAM_ADMIN_IDS` boş bırakılırsa botu herkes kullanabilir. Bunu boş bırakma.
@@ -44,26 +51,41 @@ Telegram ID öğrenmek için Telegram'da `@userinfobot` gibi bir bot kullanabili
 
 GitHub token için repo content okuma/yazma yetkisi yeterlidir.
 
-## Render ile ücretsiz çalıştırma
+## Telegram webhook bağlama
 
-1. GitHub repo'yu Render'a bağla.
-2. New > Background Worker seç.
-3. Root directory olarak `retorikmunazara` seç.
-4. Build command:
+Netlify deploy bittikten sonra Telegram'a webhook adresini bildirmen gerekir.
 
-```bash
-pip install -r bot/requirements.txt
+PowerShell'de:
+
+```powershell
+$env:TELEGRAM_BOT_TOKEN="BOT_TOKEN"
+$env:TELEGRAM_WEBHOOK_SECRET="NETLIFY_ENV_ICINE_YAZDIGIN_SECRET"
+$site="https://SITE_ADIN.netlify.app"
+Invoke-RestMethod -Method Post `
+  -Uri "https://api.telegram.org/bot$env:TELEGRAM_BOT_TOKEN/setWebhook" `
+  -Body @{
+    url="$site/api/telegram"
+    secret_token=$env:TELEGRAM_WEBHOOK_SECRET
+  }
 ```
 
-5. Start command:
+Kontrol:
 
-```bash
-python bot/telegram_bot.py
+```powershell
+Invoke-RestMethod "https://api.telegram.org/bot$env:TELEGRAM_BOT_TOKEN/getWebhookInfo"
 ```
 
-6. Environment variables bölümüne yukarıdaki değişkenleri ekle.
+`url` alanında `https://SITE_ADIN.netlify.app/api/telegram` görünmelidir.
 
-Repo kökü doğrudan `retorikmunazara` ise root directory seçmene gerek yok.
+Webhook'u kapatmak istersen:
+
+```powershell
+Invoke-RestMethod -Method Post -Uri "https://api.telegram.org/bot$env:TELEGRAM_BOT_TOKEN/deleteWebhook"
+```
+
+## Eski Python bot alternatifi
+
+`bot/telegram_bot.py` dosyası ayrı worker çalıştırmak isteyenler için duruyor. Ücretsiz ve Netlify uyumlu önerilen yöntem webhook fonksiyonudur.
 
 ## Bot komutları
 
@@ -192,4 +214,5 @@ bot/telegram_bot.py                Telegram botu
 bot/requirements.txt               Bot bağımlılıkları
 scripts/tournament_site.py         Sayfa üretici
 scripts/build.py                   Netlify build komutu
+netlify/functions/telegram.ts      Telegram webhook fonksiyonu
 ```

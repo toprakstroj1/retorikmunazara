@@ -2,6 +2,10 @@
   publish = "."
   command = "python scripts/build.py"
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 [[redirects]]
   from = "/konferanslar/:slug/basvuru"
   to = "/konferanslar/:slug/"
