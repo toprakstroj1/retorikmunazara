@@ -6,8 +6,8 @@
       "description": "Retorik tarafından geliştirilen özel münazara sisteminin 2. konferansı.",
       "dateText": "21-22-23 Ağustos 2026",
       "image": "assets/conference-images/open-council-debate-ii-ocd.jpg",
-      "status": "open",
-      "statusText": "Başvurular Açık",
+      "status": "closed",
+      "statusText": "Tamamlandı",
       "committees": [
         "Kurtuluş Savaşı (TR",
         "OCD)",
@@ -249,7 +249,8 @@
             }
           ]
         }
-      }
+      },
+      "closedDate": "1"
     }
   ]
 }
