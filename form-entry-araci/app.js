@@ -22,6 +22,11 @@ form.addEventListener('submit', async (event) => {
             body: JSON.stringify({ url: formUrl.value.trim() })
         });
 
+        const contentType = response.headers.get('content-type') || '';
+        if (!contentType.includes('application/json')) {
+            throw new Error('Parser fonksiyonuna ulaşılamadı. Netlify deploy ayarında Functions açık mı ve site Netlify üzerinden mi açıldı?');
+        }
+
         const payload = await response.json();
         if (!response.ok) {
             throw new Error(payload.error || 'Form okunamadı.');
