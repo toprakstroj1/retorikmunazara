@@ -64,11 +64,11 @@ function getConfigFieldEntries(config) {
     if (Array.isArray(config.questions)) {
         return config.questions.map((question) => [
             question.name,
-            question.entry || question.entries || config.fields?.[question.name]
+            question.entry || question.entries
         ]);
     }
 
-    return Object.entries(config.fields || {});
+    return [];
 }
 
 function postToGoogleForm(form, config) {
@@ -180,8 +180,8 @@ document.querySelectorAll('.gencmeclis-form').forEach((form) => {
         const status = form.querySelector('.form-status');
         const originalText = submitButton.textContent;
 
-        if (!config?.action) {
-            if (status) status.textContent = 'Bu başvuru formu henüz Google Forms ile eşleştirilmemiş.';
+        if (!config?.action || !Array.isArray(config.questions) || !config.questions.length) {
+            if (status) status.textContent = 'Bu başvuru formu henüz JSON form verisiyle eşleştirilmemiş.';
             return;
         }
 

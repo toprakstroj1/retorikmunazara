@@ -16,7 +16,7 @@ type TelegramUpdate = {
 };
 
 type State = {
-  flow?: "new" | "close" | "edit";
+  flow?: "new" | "close" | "edit" | "remove";
   step?: string;
   draft?: Record<string, any>;
 };
@@ -38,6 +38,19 @@ type Tournament = {
 const DATA_PATH = "data/tournaments.json";
 const DEFAULT_COMMITTEES = ["Genel Kurul", "Kriz Komitesi", "Basın Komitesi"];
 const DEFAULT_TEAMS = ["Basın Ekibi", "Lojistik Ekibi", "Delegasyon Ekibi", "Saha Ekibi"];
+const RESERVED_ROOT_SLUGS = new Set([
+  "assets",
+  "bot",
+  "data",
+  "form-entry-araci",
+  "gencmeclis",
+  "icons",
+  "images",
+  "konferanslar",
+  "netlify",
+  "scripts",
+  "api",
+]);
 
 function env(name: string, fallback = "") {
   return Netlify.env.get(name) || fallback;
@@ -82,45 +95,24 @@ function normalizeFormAction(value: string) {
   return url.split("?")[0];
 }
 
-function parseEntryMap(text: string) {
+function parseJsonFormConfig(text: string) {
   const clean = text.trim();
   if (clean === "-") return {};
 
   try {
     const parsed = JSON.parse(clean);
-    if (parsed.action) parsed.action = normalizeFormAction(parsed.action);
-    return parsed;
-  } catch {
-    // Line-based format is easier to paste from Telegram.
-  }
-
-  const config: { action: string; fields: Record<string, any> } = { action: "", fields: {} };
-  for (const rawLine of clean.split(/\r?\n/)) {
-    const line = rawLine.trim();
-    if (!line || line.startsWith("#") || !line.includes("=")) continue;
-    const [rawKey, ...rest] = line.split("=");
-    const key = rawKey.trim();
-    const value = rest.join("=").trim();
-
-    if (["action", "url", "form"].includes(key)) {
-      config.action = normalizeFormAction(value);
-    } else if (key.startsWith("birthDate.")) {
-      const part = key.split(".")[1];
-      config.fields.birthDate = { ...(config.fields.birthDate || {}), [part]: value };
-    } else {
-      config.fields[key] = value;
+    if (!parsed.action || !Array.isArray(parsed.questions) || !parsed.questions.length) {
+      throw new Error("JSON içinde action ve questions alanları olmalı.");
     }
+    parsed.action = normalizeFormAction(parsed.action);
+    return parsed;
+  } catch (error) {
+    throw new Error(`Form JSON'u okunamadı: ${(error as Error).message}`);
   }
-  return config;
 }
 
-function splitValues(text: string, fallback: string[]) {
-  if (text.trim() === "-") return fallback;
-  const values = text
-    .split(/[\n,;]+/)
-    .map((item) => item.trim())
-    .filter(Boolean);
-  return values.length ? values : fallback;
+function hasJsonForm(config: any) {
+  return Boolean(config?.action && Array.isArray(config?.questions) && config.questions.length);
 }
 
 function adminAllowed(userId?: number) {
@@ -218,6 +210,21 @@ async function putGithubFile(path: string, content: string | ArrayBuffer | Uint8
   });
 }
 
+async function deleteGithubFile(path: string, message: string) {
+  const existing = await getGithubFile(path);
+  if (!existing?.sha) return false;
+
+  await githubRequest(`/contents/${path}`, {
+    method: "DELETE",
+    body: JSON.stringify({
+      message,
+      branch: env("GITHUB_BRANCH", "main"),
+      sha: existing.sha,
+    }),
+  });
+  return true;
+}
+
 async function readTournamentData() {
   const file = await getGithubFile(DATA_PATH);
   if (!file?.content) return { tournaments: [] as Tournament[] };
@@ -265,6 +272,7 @@ function helpText() {
     "/yeni - yeni konferans aç",
     "/liste - turnuvaları göster",
     "/kapat - başvuruyu kapat",
+    "/kaldir - turnuvayı tamamen sil",
     "/duzenle - ad/açıklama/tarih/durum düzenle",
     "/iptal - aktif işlemi iptal et",
   ].join("\n");
@@ -322,6 +330,13 @@ async function handleCommand(message: TelegramMessage, text: string) {
     return;
   }
 
+  if (text === "/kaldir" || text === "/sil") {
+    await listTournaments(chatId);
+    await setState(userId!, { flow: "remove", step: "slug", draft: {} });
+    await reply(chatId, "Tamamen kaldırılacak turnuvanın slug değerini yaz.");
+    return;
+  }
+
   if (text === "/duzenle") {
     await listTournaments(chatId);
     await setState(userId!, { flow: "edit", step: "slug", draft: {} });
@@ -341,6 +356,24 @@ async function handleNewFlow(message: TelegramMessage, state: State) {
   if (state.step === "name") {
     draft.name = text;
     draft.slug = slugify(text);
+    await setState(userId, { flow: "new", step: "slug", draft });
+    await reply(chatId, `Kısa adres adını yaz. Örnek: ${draft.slug}\nSayfa şu şekilde açılacak: /${draft.slug}/`);
+    return;
+  }
+
+  if (state.step === "slug") {
+    const slug = slugify(text);
+    if (RESERVED_ROOT_SLUGS.has(slug)) {
+      await reply(chatId, "Bu kısa ad sistem klasörüyle çakışıyor. Başka bir kısa ad yaz.");
+      return;
+    }
+    const data = await readTournamentData();
+    const exists = (data.tournaments || []).some((item: Tournament) => item.slug === slug);
+    if (exists) {
+      await reply(chatId, "Bu kısa ad zaten kullanılıyor. Başka bir kısa ad yaz.");
+      return;
+    }
+    draft.slug = slug;
     await setState(userId, { flow: "new", step: "description", draft });
     await reply(chatId, "Adın altında duracak kısa açıklamayı yaz.");
     return;
@@ -380,25 +413,8 @@ async function handleNewFlow(message: TelegramMessage, state: State) {
       [
         "Delege Google Form bilgilerini gönder.",
         "",
-        "En kolay yöntem:",
         "1. form-entry-araci sitesine Google Form linkini yapıştır.",
         "2. Çıkan JSON'u buraya gönder.",
-        "",
-        "Eski kısa format da çalışır:",
-        "action=https://docs.google.com/forms/d/e/.../viewform",
-        "fullName=entry.123",
-        "birthDate.year=entry.456_year",
-        "birthDate.month=entry.456_month",
-        "birthDate.day=entry.456_day",
-        "phone=entry...",
-        "email=entry...",
-        "school=entry...",
-        "experiences=entry...",
-        "committee=entry...",
-        "committee2=entry...",
-        "reference=entry...",
-        "notes=entry...",
-        "rules=entry...",
         "",
         "Boş bırakmak için - yaz.",
       ].join("\n"),
@@ -407,27 +423,35 @@ async function handleNewFlow(message: TelegramMessage, state: State) {
   }
 
   if (state.step === "delegateForm") {
-    draft.forms = { ...(draft.forms || {}), delegate: parseEntryMap(text) };
+    try {
+      const delegateForm = parseJsonFormConfig(text);
+      draft.forms = { ...(draft.forms || {}) };
+      if (hasJsonForm(delegateForm)) draft.forms.delegate = delegateForm;
+      else delete draft.forms.delegate;
+    } catch (error) {
+      await reply(chatId, (error as Error).message);
+      return;
+    }
     await setState(userId, { flow: "new", step: "orgForm", draft });
-    await reply(chatId, "Organizasyon Google Form bilgilerini gönder. Form Entry Aracı'nın verdiği JSON'u direkt atabilirsin. Boş bırakmak için - yaz.");
+    await reply(chatId, "Organizasyon Google Form JSON'unu gönder. Organizasyon formu olmayacaksa - yaz.");
     return;
   }
 
   if (state.step === "orgForm") {
-    draft.forms = { ...(draft.forms || {}), organization: parseEntryMap(text) };
-    await setState(userId, { flow: "new", step: "committees", draft });
-    await reply(chatId, "Komite seçeneklerini virgülle veya satır satır yaz. Varsayılan için - yaz.");
-    return;
-  }
+    try {
+      const organizationForm = parseJsonFormConfig(text);
+      draft.forms = { ...(draft.forms || {}) };
+      if (hasJsonForm(organizationForm)) draft.forms.organization = organizationForm;
+      else delete draft.forms.organization;
+    } catch (error) {
+      await reply(chatId, (error as Error).message);
+      return;
+    }
+    if (!hasJsonForm(draft.forms?.delegate) && !hasJsonForm(draft.forms?.organization)) {
+      await reply(chatId, "Delege veya organizasyon formlarından en az biri dolu olmalı. /iptal ile çıkabilir ya da organizasyon JSON'u gönderebilirsin.");
+      return;
+    }
 
-  if (state.step === "committees") {
-    draft.committees = splitValues(text, DEFAULT_COMMITTEES);
-    await setState(userId, { flow: "new", step: "teams", draft });
-    await reply(chatId, "Organizasyon birimlerini virgülle veya satır satır yaz. Varsayılan için - yaz.");
-    return;
-  }
-
-  if (state.step === "teams") {
     const tournament: Tournament = {
       name: draft.name,
       slug: draft.slug,
@@ -436,8 +460,8 @@ async function handleNewFlow(message: TelegramMessage, state: State) {
       image: draft.imagePath,
       status: "open",
       statusText: "Başvurular Açık",
-      committees: draft.committees || DEFAULT_COMMITTEES,
-      teams: splitValues(text, DEFAULT_TEAMS),
+      committees: DEFAULT_COMMITTEES,
+      teams: DEFAULT_TEAMS,
       forms: draft.forms || {},
     };
 
@@ -448,7 +472,7 @@ async function handleNewFlow(message: TelegramMessage, state: State) {
     await putGithubFile(tournament.image, Buffer.from(draft.imageBase64, "base64"), `Konferans görseli: ${tournament.name}`);
     await writeTournamentData(data, `Yeni konferans: ${tournament.name}`);
     await clearState(userId);
-    await reply(chatId, `Konferans açıldı: ${tournament.name}\nSayfa: /konferanslar/${tournament.slug}/\nNetlify birazdan otomatik deploy eder.`);
+    await reply(chatId, `Konferans açıldı: ${tournament.name}\nSayfa: /${tournament.slug}/\nNetlify birazdan otomatik deploy eder.`);
   }
 }
 
@@ -481,6 +505,34 @@ async function handleCloseFlow(message: TelegramMessage, state: State) {
   await reply(chatId, `${target.name} kapatıldı. Kapanış tarihi: ${text}`);
 }
 
+async function handleRemoveFlow(message: TelegramMessage, state: State) {
+  const chatId = message.chat.id;
+  const userId = message.from!.id;
+  const slug = slugify(message.text?.trim() || "");
+
+  const data = await readTournamentData();
+  const tournaments = data.tournaments || [];
+  const target = tournaments.find((item: Tournament) => item.slug === slug);
+  if (!target) {
+    await clearState(userId);
+    await reply(chatId, "Bu slug ile turnuva bulamadım.");
+    return;
+  }
+
+  data.tournaments = tournaments.filter((item: Tournament) => item.slug !== slug);
+  const messageText = `Turnuva kaldırıldı: ${target.name}`;
+
+  await writeTournamentData(data, messageText);
+  await deleteGithubFile(`${slug}/index.html`, messageText);
+  await deleteGithubFile(`${slug}/.retorik-generated`, messageText);
+  if (target.image?.startsWith("assets/conference-images/")) {
+    await deleteGithubFile(target.image, `Turnuva görseli kaldırıldı: ${target.name}`);
+  }
+
+  await clearState(userId);
+  await reply(chatId, `${target.name} tamamen kaldırıldı. Netlify deploy sonrası ana sayfa ve /${slug}/ temizlenir.`);
+}
+
 async function handleEditFlow(message: TelegramMessage, state: State) {
   const chatId = message.chat.id;
   const userId = message.from!.id;
@@ -490,12 +542,12 @@ async function handleEditFlow(message: TelegramMessage, state: State) {
   if (state.step === "slug") {
     draft.slug = text;
     await setState(userId, { flow: "edit", step: "field", draft });
-    await reply(chatId, "Düzenlenecek alanı yaz: name, description, dateText, statusText, committees, teams");
+    await reply(chatId, "Düzenlenecek alanı yaz: name, description, dateText, statusText");
     return;
   }
 
   if (state.step === "field") {
-    if (!["name", "description", "dateText", "statusText", "committees", "teams"].includes(text)) {
+    if (!["name", "description", "dateText", "statusText"].includes(text)) {
       await clearState(userId);
       await reply(chatId, "Bu alan desteklenmiyor.");
       return;
@@ -514,7 +566,7 @@ async function handleEditFlow(message: TelegramMessage, state: State) {
     return;
   }
 
-  target[draft.field as keyof Tournament] = ["committees", "teams"].includes(draft.field) ? splitValues(text, []) as any : text as any;
+  target[draft.field as keyof Tournament] = text as any;
   await writeTournamentData(data, `Konferans düzenlendi: ${target.name}`);
   await clearState(userId);
   await reply(chatId, "Düzenleme kaydedildi.");
@@ -542,6 +594,7 @@ async function handleMessage(message: TelegramMessage) {
 
   if (state.flow === "new") await handleNewFlow(message, state);
   if (state.flow === "close") await handleCloseFlow(message, state);
+  if (state.flow === "remove") await handleRemoveFlow(message, state);
   if (state.flow === "edit") await handleEditFlow(message, state);
 }
 

@@ -1,11 +1,17 @@
 [build]
   publish = "."
-  command = "echo 'no build'"
+  command = "npm install && python scripts/build.py"
+
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
 [[redirects]]
   from = "/konferanslar/:slug/basvuru"
-  to = "/konferanslar/:slug/"
+  to = "/:slug/"
+  status = 301
+
+[[redirects]]
+  from = "/konferanslar/:slug"
+  to = "/:slug/"
   status = 301

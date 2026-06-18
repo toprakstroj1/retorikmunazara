@@ -22,9 +22,10 @@
         card.dataset.category = 'turnuva';
         card.dataset.managedTournament = slug;
 
+        const firstHash = getFirstApplicationHash(item);
         const statusText = isOpen ? (item.statusText || 'Başvurular Açık') : (item.closedDate ? `Kapandı: ${item.closedDate}` : 'Tamamlandı');
-        const action = isOpen
-            ? `<a href="konferanslar/${encodeURIComponent(slug)}/#delege" class="apply-btn">Başvuru Yap</a>`
+        const action = isOpen && firstHash
+            ? `<a href="${encodeURIComponent(slug)}/${firstHash}" class="apply-btn">Başvuru Yap</a>`
             : '';
 
         card.innerHTML = `
@@ -55,4 +56,14 @@ function escapeHtml(value) {
 
 function escapeAttribute(value) {
     return escapeHtml(value).replaceAll('`', '&#096;');
+}
+
+function hasJsonForm(config) {
+    return Boolean(config?.action && Array.isArray(config?.questions) && config.questions.length);
+}
+
+function getFirstApplicationHash(item) {
+    if (hasJsonForm(item.forms?.delegate)) return '#delege';
+    if (hasJsonForm(item.forms?.organization)) return '#orga';
+    return '';
 }

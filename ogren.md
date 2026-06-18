@@ -5,9 +5,9 @@ Bu sistem `retorikmunazara` klasörü içinde çalışır ve Netlify'a yükleneb
 ## Sistem ne yapar?
 
 - Telegram botundan yeni konferans/turnuva açarsın.
-- Bot senden ad, açıklama, tarih/durum yazısı, görsel, Google Form entry bilgileri, komite ve organizasyon birimlerini ister.
+- Bot senden ad, kısa adres adı, açıklama, tarih/durum yazısı, görsel, delege form JSON'u ve organizasyon form JSON'u ister.
 - Bilgiler `data/tournaments.json` dosyasına yazılır.
-- Başvuru sayfası `konferanslar/<slug>/index.html` olarak üretilir.
+- Başvuru sayfası `<kisa-ad>/index.html` olarak üretilir ve sitede `retorikmunazara.com/<kisa-ad>/` şeklinde açılır.
 - Ana sayfa `managed-tournaments.js` ile bu turnuvaları otomatik kart olarak gösterir.
 - GitHub repo Netlify'a bağlıysa her bot işlemi sonrası Netlify otomatik deploy alır.
 
@@ -18,7 +18,7 @@ Repo kökü `retorikmunazara` olmalı.
 Netlify build ayarı:
 
 ```text
-Build command: python scripts/build.py
+Build command: npm install && python scripts/build.py
 Publish directory: .
 ```
 
@@ -94,6 +94,7 @@ Invoke-RestMethod -Method Post -Uri "https://api.telegram.org/bot$env:TELEGRAM_B
 /yeni
 /liste
 /kapat
+/kaldir
 /duzenle
 /iptal
 ```
@@ -101,6 +102,8 @@ Invoke-RestMethod -Method Post -Uri "https://api.telegram.org/bot$env:TELEGRAM_B
 `/yeni` yeni konferans açar.
 
 `/kapat` bir turnuvanın başvurusunu kapatır ve kapanış tarihini sayfaya işler.
+
+`/kaldir` veya `/sil` turnuvayı tamamen listeden ve üretilmiş başvuru sayfasından kaldırır.
 
 `/duzenle` şu alanları değiştirir:
 
@@ -144,78 +147,7 @@ Kullanım:
 
 Bu yöntem Google Form'daki gerçek soruları yeni başvuru sayfasına taşır. Yani her turnuva aynı sabit soru şablonuna bağlı kalmaz.
 
-Alternatif elle yöntem:
-
-1. Google Form oluştur.
-2. Form sorularını site alanlarıyla eşleştir.
-3. Formda sağ üstten üç nokta > Önceden doldurulmuş bağlantı al seç.
-4. Her soruya örnek cevap yaz.
-5. Linki oluştur.
-6. Link içindeki `entry.xxxxx=...` parçalarından entry numaralarını al.
-
-Delege formu için bot şu formatı ister:
-
-```text
-action=https://docs.google.com/forms/d/e/FORM_ID/viewform
-fullName=entry.123
-birthDate.year=entry.456_year
-birthDate.month=entry.456_month
-birthDate.day=entry.456_day
-phone=entry.789
-email=entry.111
-school=entry.222
-experiences=entry.333
-committee=entry.444
-committee2=entry.555
-reference=entry.666
-notes=entry.777
-rules=entry.888
-```
-
-Organizasyon formu için aynı formatı kullan, sadece komite yerine:
-
-```text
-team=entry.999
-```
-
-Google Form linki `/viewform` olsa bile bot bunu otomatik `/formResponse` haline çevirir.
-
-Bir formu sonra bağlayacaksan bot sorunca `-` yazabilirsin. Bu durumda sayfa açılır ama kullanıcı başvuru göndermeye çalışınca form eşleşmesi yok uyarısı görür.
-
-## Site alanları
-
-Delege başvurusunda kullanılan alanlar:
-
-```text
-fullName
-birthDate
-phone
-email
-city
-school
-experiences
-committee
-committee2
-reference
-notes
-rules
-```
-
-Organizasyon başvurusunda kullanılan alanlar:
-
-```text
-fullName
-birthDate
-phone
-email
-city
-school
-team
-experiences
-reference
-notes
-rules
-```
+Delege veya organizasyon formlarından biri olmayacaksa bot sorunca `-` yazabilirsin. İkisi birden boş bırakılamaz.
 
 ## Yerelde test
 
@@ -236,7 +168,7 @@ http://localhost:8000
 ```text
 data/tournaments.json              Turnuva verileri
 assets/conference-images/          Botla yüklenen görseller
-konferanslar/<slug>/index.html     Üretilen başvuru sayfaları
+<kisa-ad>/index.html               Üretilen başvuru sayfaları
 konferanslar/basvuru.js            Başvuru formu gönderim kodu
 managed-tournaments.js             Ana sayfaya bot turnuvalarını ekler
 bot/telegram_bot.py                Telegram botu
