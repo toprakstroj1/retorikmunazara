@@ -1,3 +1,255 @@
 {
-  "tournaments": []
+  "tournaments": [
+    {
+      "name": "Open Council Debate II (OCD)",
+      "slug": "open-council-debate-ii-ocd",
+      "description": "Retorik tarafından geliştirilen özel münazara sisteminin 2. konferansı.",
+      "dateText": "21-22-23 Ağustos 2026",
+      "image": "assets/conference-images/open-council-debate-ii-ocd.jpg",
+      "status": "open",
+      "statusText": "Başvurular Açık",
+      "committees": [
+        "Kurtuluş Savaşı (TR",
+        "OCD)",
+        "Kadın Hakları (TR",
+        "OCD)",
+        "Uluslararası İlişkiler (TR",
+        "OCD)",
+        "İnsan Psikolojisi (TR",
+        "OCD)",
+        "Russian Civil War (ENG",
+        "OCD)",
+        "Kısmetse Olur (TR",
+        "KRİZ)",
+        "DISNEY (ENG",
+        "CRISIS)"
+      ],
+      "teams": [
+        "Basın Ekibi",
+        "Lojistik Ekibi",
+        "Delegasyon Ekibi",
+        "Saha Ekibi"
+      ],
+      "forms": {
+        "delegate": {
+          "action": "https://docs.google.com/forms/d/e/1FAIpQLSe8LyxVhIHkAaULAQ-RnODWgLVEKBjFpTX0cMJYRCrDszsy7w/formResponse",
+          "questions": [
+            {
+              "name": "q_57742765",
+              "label": "İsim ve soy isim. ",
+              "entry": "entry.57742765",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_457521081",
+              "label": "Doğum tarihi.",
+              "entry": "entry.457521081",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_422803556",
+              "label": " Telefon numarası.",
+              "entry": "entry.422803556",
+              "kind": "tel",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_575033634",
+              "label": "E-mail hesabı.",
+              "entry": "entry.575033634",
+              "kind": "email",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_520640593",
+              "label": "Hangi şehirden katılım sağlıyorsunuz?",
+              "entry": "entry.520640593",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_390389414",
+              "label": "Hangi okulda eğitim görüyorsunuz? (Aktif olarak örgün eğitime devam etmiyorsanız en son mezun olduğunuz okulu yazabilirsiniz.)",
+              "entry": "entry.390389414",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_776591440",
+              "label": "Deneyimleriniz.",
+              "entry": "entry.776591440",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_1920623885",
+              "label": "1. Komite Tercihiniz.",
+              "entry": "entry.1920623885",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_1285144234",
+              "label": "2. Komite Tercihiniz.",
+              "entry": "entry.1285144234",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_1761729210",
+              "label": "3. Komite Tercihiniz.",
+              "entry": "entry.1761729210",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_2037145325",
+              "label": "Varsa referans olan kişi.",
+              "entry": "entry.2037145325",
+              "kind": "text",
+              "required": false,
+              "options": []
+            },
+            {
+              "name": "q_718651676",
+              "label": "Eklemek istedikleriniz.",
+              "entry": "entry.718651676",
+              "kind": "text",
+              "required": false,
+              "options": []
+            },
+            {
+              "name": "q_28563211",
+              "label": "Şartları ve Kulüp İç Tüzüğünü okudum, kabul ediyorum.",
+              "entry": "entry.28563211",
+              "kind": "text",
+              "required": true,
+              "options": []
+            }
+          ]
+        },
+        "organization": {
+          "action": "https://docs.google.com/forms/d/e/1FAIpQLSe8LyxVhIHkAaULAQ-RnODWgLVEKBjFpTX0cMJYRCrDszsy7w/formResponse",
+          "questions": [
+            {
+              "name": "q_57742765",
+              "label": "İsim ve soy isim. ",
+              "entry": "entry.57742765",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_457521081",
+              "label": "Doğum tarihi.",
+              "entry": "entry.457521081",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_422803556",
+              "label": " Telefon numarası.",
+              "entry": "entry.422803556",
+              "kind": "tel",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_575033634",
+              "label": "E-mail hesabı.",
+              "entry": "entry.575033634",
+              "kind": "email",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_520640593",
+              "label": "Hangi şehirden katılım sağlıyorsunuz?",
+              "entry": "entry.520640593",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_390389414",
+              "label": "Hangi okulda eğitim görüyorsunuz? (Aktif olarak örgün eğitime devam etmiyorsanız en son mezun olduğunuz okulu yazabilirsiniz.)",
+              "entry": "entry.390389414",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_776591440",
+              "label": "Deneyimleriniz.",
+              "entry": "entry.776591440",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_1920623885",
+              "label": "1. Komite Tercihiniz.",
+              "entry": "entry.1920623885",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_1285144234",
+              "label": "2. Komite Tercihiniz.",
+              "entry": "entry.1285144234",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_1761729210",
+              "label": "3. Komite Tercihiniz.",
+              "entry": "entry.1761729210",
+              "kind": "text",
+              "required": true,
+              "options": []
+            },
+            {
+              "name": "q_2037145325",
+              "label": "Varsa referans olan kişi.",
+              "entry": "entry.2037145325",
+              "kind": "text",
+              "required": false,
+              "options": []
+            },
+            {
+              "name": "q_718651676",
+              "label": "Eklemek istedikleriniz.",
+              "entry": "entry.718651676",
+              "kind": "text",
+              "required": false,
+              "options": []
+            },
+            {
+              "name": "q_28563211",
+              "label": "Şartları ve Kulüp İç Tüzüğünü okudum, kabul ediyorum.",
+              "entry": "entry.28563211",
+              "kind": "text",
+              "required": true,
+              "options": []
+            }
+          ]
+        }
+      }
+    }
+  ]
 }
