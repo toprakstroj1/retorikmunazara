@@ -380,7 +380,11 @@ async function handleNewFlow(message: TelegramMessage, state: State) {
       [
         "Delege Google Form bilgilerini gönder.",
         "",
-        "Format:",
+        "En kolay yöntem:",
+        "1. form-entry-araci sitesine Google Form linkini yapıştır.",
+        "2. Çıkan JSON'u buraya gönder.",
+        "",
+        "Eski kısa format da çalışır:",
         "action=https://docs.google.com/forms/d/e/.../viewform",
         "fullName=entry.123",
         "birthDate.year=entry.456_year",
@@ -405,7 +409,7 @@ async function handleNewFlow(message: TelegramMessage, state: State) {
   if (state.step === "delegateForm") {
     draft.forms = { ...(draft.forms || {}), delegate: parseEntryMap(text) };
     await setState(userId, { flow: "new", step: "orgForm", draft });
-    await reply(chatId, "Organizasyon Google Form bilgilerini aynı formatta gönder. Boş bırakmak için - yaz. Organizasyonda team=entry.x kullan.");
+    await reply(chatId, "Organizasyon Google Form bilgilerini gönder. Form Entry Aracı'nın verdiği JSON'u direkt atabilirsin. Boş bırakmak için - yaz.");
     return;
   }
 

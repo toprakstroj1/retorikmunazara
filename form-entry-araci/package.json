@@ -1,0 +1,12 @@
+{
+  "name": "retorik-form-entry-araci",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@netlify/functions": "^3.1.10"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.3"
+  }
+}

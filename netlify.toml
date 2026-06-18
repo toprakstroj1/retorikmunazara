@@ -1,7 +1,6 @@
 [build]
   publish = "."
-  command = "python scripts/build.py"
-
+  command = "echo 'no build'"
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"

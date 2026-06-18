@@ -14,6 +14,19 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 function getFieldValue(field) {
+    if (!field) return '';
+
+    if (field instanceof RadioNodeList || field.length) {
+        const fields = Array.from(field);
+        const checkedValues = fields
+            .filter((item) => item.checked)
+            .map((item) => item.value.trim())
+            .filter(Boolean);
+
+        if (checkedValues.length) return checkedValues;
+        return field.value?.trim?.() || '';
+    }
+
     if (field.type === 'checkbox') {
         return field.checked ? field.value : '';
     }
@@ -29,6 +42,11 @@ function createHiddenField(name, value) {
 }
 
 function appendGoogleField(proxyForm, googleEntryName, value) {
+    if (Array.isArray(value)) {
+        value.forEach((item) => appendGoogleField(proxyForm, googleEntryName, item));
+        return;
+    }
+
     if (typeof googleEntryName === 'string') {
         proxyForm.appendChild(createHiddenField(googleEntryName, value));
         return;
@@ -40,6 +58,17 @@ function appendGoogleField(proxyForm, googleEntryName, value) {
         proxyForm.appendChild(createHiddenField(googleEntryName.month, month || ''));
         proxyForm.appendChild(createHiddenField(googleEntryName.day, day || ''));
     }
+}
+
+function getConfigFieldEntries(config) {
+    if (Array.isArray(config.questions)) {
+        return config.questions.map((question) => [
+            question.name,
+            question.entry || question.entries || config.fields?.[question.name]
+        ]);
+    }
+
+    return Object.entries(config.fields || {});
 }
 
 function postToGoogleForm(form, config) {
@@ -55,7 +84,7 @@ function postToGoogleForm(form, config) {
         proxyForm.action = config.action;
         proxyForm.target = frameName;
 
-        Object.entries(config.fields || {}).forEach(([fieldName, googleEntryName]) => {
+        getConfigFieldEntries(config).forEach(([fieldName, googleEntryName]) => {
             const field = form.elements[fieldName];
             if (!field) return;
             appendGoogleField(proxyForm, googleEntryName, getFieldValue(field));
@@ -136,6 +165,15 @@ document.querySelectorAll('.gencmeclis-form').forEach((form) => {
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
         if (!form.reportValidity()) return;
+
+        const invalidGroup = Array.from(form.querySelectorAll('[data-required-group][data-required="true"]'))
+            .find((group) => !group.querySelector('input[type="checkbox"]:checked'));
+        if (invalidGroup) {
+            invalidGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            const status = form.querySelector('.form-status');
+            if (status) status.textContent = 'Lütfen zorunlu çoklu seçim sorularını doldurun.';
+            return;
+        }
 
         const config = GOOGLE_FORM_CONFIG[form.dataset.googleForm];
         const submitButton = form.querySelector('.form-submit');

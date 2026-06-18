@@ -80,15 +80,33 @@ def normalize_tournament(item: dict) -> dict:
     return normalized
 
 
-def input_html(name: str, label: str, field_type: str, required: bool, tournament: dict) -> str:
+def input_html(name: str, label: str, field_type: str, required: bool, tournament: dict, options: list[str] | None = None) -> str:
     required_attr = " required" if required else ""
     safe_label = escape(label)
     safe_name = escape(name)
+    options = options or []
 
     if field_type == "textarea":
         return f'<label class="form-wide">{safe_label}<textarea name="{safe_name}" rows="4"{required_attr}></textarea></label>'
     if field_type == "checkbox":
         return f'<label><input type="checkbox" name="{safe_name}" value="Evet."{required_attr} /> {safe_label}</label>'
+    if field_type == "checkboxes":
+        choices = "\n".join(
+            f'<label><input type="checkbox" name="{safe_name}" value="{escape(value)}" /> {escape(value)}</label>'
+            for value in options
+        )
+        return f'''<fieldset class="form-wide dynamic-choice-group" data-required-group="{safe_name}"{" data-required=\"true\"" if required else ""}>
+            <legend>{safe_label}</legend>
+            <div class="form-consents">{choices}</div>
+        </fieldset>'''
+    if field_type in {"select", "radio"}:
+        choices = "\n".join(f'<option value="{escape(value)}">{escape(value)}</option>' for value in options)
+        return f'''<label class="form-wide">{safe_label}
+            <select name="{safe_name}"{required_attr}>
+                <option value="" selected disabled>Seçim yapın</option>
+                {choices}
+            </select>
+        </label>'''
     if field_type == "city":
         return f'''<label>{safe_label}
             <select name="{safe_name}" autocomplete="address-level2"{required_attr}>
@@ -120,7 +138,8 @@ def input_html(name: str, label: str, field_type: str, required: bool, tournamen
         "phone": " autocomplete=\"tel\"",
         "email": " autocomplete=\"email\"",
     }.get(name, "")
-    return f'<label>{safe_label}<input type="{escape(field_type)}" name="{safe_name}"{autocomplete}{required_attr} /></label>'
+    html_type = field_type if field_type in {"text", "date", "email", "tel", "number", "time"} else "text"
+    return f'<label>{safe_label}<input type="{escape(html_type)}" name="{safe_name}"{autocomplete}{required_attr} /></label>'
 
 
 def form_fields_html(fields: list[tuple[str, str, str, bool]], tournament: dict) -> tuple[str, str]:
@@ -135,9 +154,38 @@ def form_fields_html(fields: list[tuple[str, str, str, bool]], tournament: dict)
     return "\n".join(grid_items), "\n".join(consent_items)
 
 
+def dynamic_form_fields_html(config: dict, fallback_fields: list[tuple[str, str, str, bool]], tournament: dict) -> tuple[str, str]:
+    questions = config.get("questions") if isinstance(config, dict) else None
+    if not questions:
+        return form_fields_html(fallback_fields, tournament)
+
+    grid_items = []
+    consent_items = []
+    for index, question in enumerate(questions, start=1):
+        name = question.get("name") or f"q_{index}"
+        label = question.get("label") or f"Soru {index}"
+        field_type = question.get("kind") or question.get("type") or "text"
+        required = bool(question.get("required"))
+        options = question.get("options") or []
+        markup = input_html(name, label, field_type, required, tournament, options)
+        if field_type == "checkbox":
+            consent_items.append(markup)
+        else:
+            grid_items.append(markup)
+    return "\n".join(grid_items), "\n".join(consent_items)
+
+
 def page_html(tournament: dict) -> str:
-    delegate_grid, delegate_consents = form_fields_html(DEFAULT_DELEGATE_FIELDS, tournament)
-    org_grid, org_consents = form_fields_html(DEFAULT_ORGANIZATION_FIELDS, tournament)
+    delegate_grid, delegate_consents = dynamic_form_fields_html(
+        tournament["forms"].get("delegate", {}),
+        DEFAULT_DELEGATE_FIELDS,
+        tournament,
+    )
+    org_grid, org_consents = dynamic_form_fields_html(
+        tournament["forms"].get("organization", {}),
+        DEFAULT_ORGANIZATION_FIELDS,
+        tournament,
+    )
     google_config = json.dumps(tournament["forms"], ensure_ascii=False, indent=4)
     title = escape(tournament["name"])
     description = escape(tournament["description"])

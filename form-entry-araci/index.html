@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RETORİK Form Entry Aracı</title>
+    <meta name="description" content="Google Forms linkinden soru başlıklarını ve entry id bilgilerini çıkarır." />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <main class="tool-shell">
+        <section class="hero">
+            <p class="eyebrow">RETORİK</p>
+            <h1>Google Form Entry Aracı</h1>
+            <p>Google Form linkini yapıştır, soru başlıklarını ve botun kabul ettiği JSON formatını al.</p>
+        </section>
+
+        <section class="panel">
+            <form id="formLookup" class="lookup-form">
+                <label>
+                    Google Form linki
+                    <input id="formUrl" type="url" placeholder="https://docs.google.com/forms/d/e/.../viewform" required />
+                </label>
+                <div class="actions">
+                    <button type="submit">Soruları Çıkar</button>
+                    <button type="button" id="sampleBtn" class="secondary">Örnek Format</button>
+                </div>
+            </form>
+            <p id="status" class="status" role="status"></p>
+        </section>
+
+        <section id="resultPanel" class="result-grid" hidden>
+            <article class="panel">
+                <div class="panel-head">
+                    <h2>Sorular</h2>
+                    <button id="copySummary" type="button" class="secondary">Kopyala</button>
+                </div>
+                <div id="questions" class="question-list"></div>
+            </article>
+
+            <article class="panel">
+                <div class="panel-head">
+                    <h2>Bota Atılacak JSON</h2>
+                    <button id="copyJson" type="button">JSON Kopyala</button>
+                </div>
+                <textarea id="jsonOutput" readonly spellcheck="false"></textarea>
+            </article>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

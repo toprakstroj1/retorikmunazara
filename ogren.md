@@ -115,7 +115,36 @@ teams
 
 ## Google Forms entry bilgilerini alma
 
-En kolay ve bedava yöntem:
+Artık en kolay yöntem ayrı araç sitesidir.
+
+## Form Entry Aracı
+
+Yeni klasör:
+
+```text
+form-entry-araci
+```
+
+Bu klasörü Netlify'a ayrı site olarak yükleyebilirsin.
+
+Netlify ayarı:
+
+```text
+Base directory: form-entry-araci
+Build command: npm install
+Publish directory: .
+```
+
+Kullanım:
+
+1. Google Form linkini araca yapıştır.
+2. Araç soru başlıklarını, entry id'lerini ve seçenekleri çıkarır.
+3. `Bota Atılacak JSON` çıktısını kopyala.
+4. Telegram botu `/yeni` akışında delege veya organizasyon form bilgisi istediğinde bu JSON'u gönder.
+
+Bu yöntem Google Form'daki gerçek soruları yeni başvuru sayfasına taşır. Yani her turnuva aynı sabit soru şablonuna bağlı kalmaz.
+
+Alternatif elle yöntem:
 
 1. Google Form oluştur.
 2. Form sorularını site alanlarıyla eşleştir.
